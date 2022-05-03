@@ -1,11 +1,16 @@
-#Install shibboleth
-
 ---
-- name: Checking, ( or if not present), Generating the SP keys
-  command: shib-keygen -f -u _shibd -h {{ HOSTNAME }} -y 7 -e https://{{ HOSTNAME }}/shibboleth -o /etc/shibboleth/
-  args:
-    chdir: /etc/shibboleth/
-    creates: /etc/shibboleth/sp-key.pem
+- name: check if sp-key.pem exist
+  stat:
+    path: /etc/shibboleth/sp-key.pem
+  register: sp_key
+
+- name: check if sp-cert.pem exist
+  stat:
+    path: /etc/shibboleth/sp-cert.pem
+  register: sp_cert
+
+- include: selfsigned.yml
+  when: "(not sp_key.stat.exists) or (not sp_cert.stat.exists)"
 
 - name: Configuring shibboleth2.xml
   template: 
@@ -32,4 +37,3 @@
     group: _shibd
     owner: _shibd
   when: SHIB_DOWNLOAD_METADATA
-

@@ -1,0 +1,12 @@
+---
+- openssl_privatekey:
+    path: /etc/shibboleth/sp-key.pem
+    size: 2048
+- openssl_csr:
+    path: /etc/shibboleth/sp-cert.csr
+    privatekey_path: /etc/shibboleth/sp-key.pem
+- openssl_certificate:
+    provider: selfsigned
+    path: /etc/shibboleth/sp-cert.pem
+    privatekey_path: /etc/shibboleth/sp-key.pem
+    csr_path: /etc/shibboleth/sp-cert.csr

@@ -1,0 +1,12 @@
+---
+- openssl_privatekey:
+    path: /etc/apache2/ssl/ssl.key
+    size: 2048
+- openssl_csr:
+    path: /etc/apache2/ssl/ssl.csr
+    privatekey_path: /etc/apache2/ssl/ssl.key
+- openssl_certificate:
+    provider: selfsigned
+    path: /etc/apache2/ssl/ssl.crt
+    privatekey_path: /etc/apache2/ssl/ssl.key
+    csr_path: /etc/apache2/ssl/ssl.csr

@@ -12,6 +12,9 @@ ENV SUPPORT_EMAIL='root@localhost'
 ENV SHIB_METADATA_BACKUP_URL="https://samltest.id/saml/idp"
 ENV SHIB_DOWNLOAD_METADATA=true
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Denver
+
 RUN \
   apt-get update && \
   apt-get upgrade -y curl ansible gnupg2 apache2
