@@ -1,10 +1,10 @@
 ---
-- name: check if sp-key.pem exist
+- name: check if sp-key.pem exists
   stat:
     path: /etc/shibboleth/sp-key.pem
   register: sp_key
 
-- name: check if sp-cert.pem exist
+- name: check if sp-cert.pem exists
   stat:
     path: /etc/shibboleth/sp-cert.pem
   register: sp_cert
@@ -12,6 +12,18 @@
 - include: selfsigned.yml
   when: "(not sp_key.stat.exists) or (not sp_cert.stat.exists)"
 
+- name: check if idp-metadata.xml exists
+  stat:
+    path: /secrets/idp-metadata.xml
+
+- name: Configuring attribute-map.xml
+  template: 
+    src: attribute-map.xml
+    dest: /etc/shibboleth/attribute-map.xml
+    group: _shibd
+    owner: _shibd
+    mode: 0644
+  
 - name: Configuring shibboleth2.xml
   template: 
     src: shibboleth2.xml
@@ -19,21 +31,4 @@
     group: _shibd
     owner: _shibd
     mode: 0644
-  notify: restart shibd
-
-- name: Checking, ( or if not present), Creating /etc/shibboleth/metadata directory
-  file: 
-    path: /etc/shibboleth/metadata
-    state: directory
-    mode: 2774
-    group: _shibd
-    owner: _shibd
-
-- name: Downloading metadata into metadata directory as backup
-  get_url:
-    url: "{{ SHIB_METADATA_BACKUP_URL }}"
-    dest: /etc/shibboleth/metadata/idp-metadata.xml
-    mode: 0640
-    group: _shibd
-    owner: _shibd
-  when: SHIB_DOWNLOAD_METADATA
+  notify: restart shibd  

@@ -44,7 +44,7 @@ RUN \
   apt-get autoremove -y && \
   service shibd stop && \
   service apache2 stop && \
-  rm -fr /var/lib/apt/lists/* /etc/shibboleth/sp-*.pem /etc/apache2/ssl/* /var/run/apache2/apache2.pid 
+  rm -fr /var/lib/apt/lists/* /etc/shibboleth/sp-*.pem /etc/apache2/ssl/* /var/run/apache2/apache2.pid
 
 EXPOSE 80 443
 
