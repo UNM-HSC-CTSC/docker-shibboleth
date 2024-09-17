@@ -1,5 +1,3 @@
-[![](https://images.microbadger.com/badges/version/jefferyb/shibboleth-sp.svg)](http://microbadger.com/images/jefferyb/shibboleth-sp "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/jefferyb/shibboleth-sp.svg)](http://microbadger.com/images/jefferyb/shibboleth-sp "Get your own image badge on microbadger.com")
-
 ## jefferyb/shibboleth-sp
 A Shibboleth Service Provider (SP). Just put this in front a service that you would like to protect, working as a Reverse-Proxy
 
