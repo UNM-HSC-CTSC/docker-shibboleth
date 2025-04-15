@@ -228,3 +228,7 @@ services:
 ```
 
 You should be redirected to a shibboleth login when you visit https://example.com
+
+
+LATEST VERSION AS REFERENCE: 
+https://github.com/ConsortiumGARR/idem-tutorials/blob/master/idem-fedops/HOWTO-Shibboleth/Service%20Provider/Debian/HOWTO%20Install%20and%20Configure%20a%20Shibboleth%20SP%20v3.x%20on%20Debian-Ubuntu%20Linux.md#install-software-requirements
