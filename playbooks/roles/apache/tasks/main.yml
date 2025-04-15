@@ -14,7 +14,7 @@
     path: /etc/apache2/ssl/ssl.key
   register: ssl_key
 
-- include: selfsigned.yml
+- import_tasks: selfsigned.yml
   when: "(not ssl_crt.stat.exists) or (not ssl_key.stat.exists)"
 
 - name: Configure apache proxy

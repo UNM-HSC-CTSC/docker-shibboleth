@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-MAINTAINER Jeffery Bagirimvano <jefferyb@uark.edu>
 
 ENV HOSTNAME="localhost"
 ####### APACHE SECTION #######
@@ -19,13 +18,18 @@ RUN \
   apt-get update && \
   apt-get upgrade -y curl ansible gnupg2 apache2
 
+RUN apt install mc -y
+
 COPY playbooks/hosts /etc/ansible/hosts
 
-RUN \
-  ansible localhost -m apt_key -a 'id="294E37D154156E00FB96D7AA26C3C46915B76742" url=http://pkg.switch.ch/switchaai/SWITCHaai-swdistrib.asc state=present' && \
-  ansible localhost -m apt_repository -a 'repo="deb http://pkg.switch.ch/switchaai/ubuntu bionic main" state=present' && \
-  apt-get update && \
-  apt-get install -y --install-recommends shibboleth libapache2-mod-shib2
+# RUN \
+#  ansible localhost -m apt_key -a 'id="294E37D154156E00FB96D7AA26C3C46915B76742" url=http://pkg.switch.ch/switchaai/SWITCHaai-swdistrib.asc state=present' && \
+#  ansible localhost -m apt_repository -a 'repo="deb http://pkg.switch.ch/switchaai/ubuntu bionic main" state=present' && \
+#  apt-get update && \
+#  apt-get install -y --install-recommends shibboleth libapache2-mod-shib2
+  
+RUN apt install apache2 libapache2-mod-shib ntp --no-install-recommends -y
+
 
 RUN \
   shibd -t && \

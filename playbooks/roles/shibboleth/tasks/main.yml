@@ -9,7 +9,7 @@
     path: /etc/shibboleth/sp-cert.pem
   register: sp_cert
 
-- include: selfsigned.yml
+- include_tasks: selfsigned.yml
   when: "(not sp_key.stat.exists) or (not sp_cert.stat.exists)"
 
 - name: check if idp-metadata.xml exists
